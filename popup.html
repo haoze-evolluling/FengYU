@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>凤羽 (FengYU)</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>凤羽 (FengYU)</h1>
+      <div class="settings-btn" id="settingsBtn" title="设置">⚙️</div>
+    </header>
+    
+    <main>
+      <div class="categories-container" id="categoriesContainer">
+        <!-- 分类卡片将通过JavaScript动态生成 -->
+      </div>
+    </main>
+
+    <!-- 添加分类的模态窗口 -->
+    <div class="modal" id="addCategoryModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>添加分类</h2>
+        <form id="addCategoryForm">
+          <div class="form-group">
+            <label for="categoryName">分类名称</label>
+            <input type="text" id="categoryName" required maxlength="20">
+          </div>
+          <button type="submit" class="btn">保存</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 添加网站的模态窗口 -->
+    <div class="modal" id="addWebsiteModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>添加网站</h2>
+        <form id="addWebsiteForm">
+          <input type="hidden" id="categoryId">
+          <div class="form-group">
+            <label for="websiteName">网站名称</label>
+            <input type="text" id="websiteName" required>
+          </div>
+          <div class="form-group">
+            <label for="websiteUrl">网站地址</label>
+            <input type="url" id="websiteUrl" required placeholder="https://example.com">
+          </div>
+          <div class="form-group">
+            <label for="websiteIcon">图标URL (可选)</label>
+            <input type="url" id="websiteIcon" placeholder="https://example.com/favicon.ico">
+          </div>
+          <button type="submit" class="btn">保存</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 右键菜单 -->
+    <div class="context-menu" id="contextMenu">
+      <ul>
+        <li id="editCategory">编辑分类</li>
+        <li id="deleteCategory">删除分类</li>
+        <li id="addNewCategory">添加新分类</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
