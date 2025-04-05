@@ -173,6 +173,11 @@ main {
   display: flex;
   align-items: center;
   width: 100%;
+  transition: transform 0.1s ease;
+}
+
+.website-link:active {
+  transform: scale(0.95);
 }
 
 .add-website-btn {
