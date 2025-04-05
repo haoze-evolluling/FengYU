@@ -13,8 +13,24 @@ const addCategoryForm = document.getElementById('addCategoryForm');
 const addWebsiteForm = document.getElementById('addWebsiteForm');
 const contextMenu = document.getElementById('contextMenu');
 
+// 随机选择背景图片
+function setRandomBackground() {
+  // 背景图片数组
+  const backgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png'];
+  
+  // 随机选择一张背景图片
+  const randomIndex = Math.floor(Math.random() * backgrounds.length);
+  const selectedBackground = backgrounds[randomIndex];
+  
+  // 设置背景图片
+  document.body.style.backgroundImage = `url('${selectedBackground}')`;
+}
+
 // 初始化函数
 document.addEventListener('DOMContentLoaded', () => {
+  // 设置随机背景图片
+  setRandomBackground();
+  
   // 从存储中加载数据
   loadCategories();
   

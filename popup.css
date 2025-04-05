@@ -33,15 +33,18 @@ body.dark-mode {
 
 body {
   font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: url('backgroud.png') no-repeat center center fixed;
+  /* 背景图片将通过JavaScript动态设置 */
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text-color);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background-image 0.5s ease;
 }
 
 .container {
