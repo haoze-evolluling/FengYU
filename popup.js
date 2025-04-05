@@ -42,6 +42,63 @@ function loadCategories() {
       document.getElementById('themeIcon').textContent = '🌙';
     }
     
+    // 如果没有分类，添加默认分类和网站
+    if (categories.length === 0) {
+      categories = [
+        {
+          name: "学习资源",
+          websites: [
+            { name: "百度文库", url: "https://wenku.baidu.com", icon: "" },
+            { name: "中国大学MOOC", url: "https://www.icourse163.org", icon: "" },
+            { name: "知网", url: "https://www.cnki.net", icon: "" },
+            { name: "学堂在线", url: "https://www.xuetangx.com", icon: "" },
+            { name: "菜鸟教程", url: "https://www.runoob.com", icon: "" }
+          ]
+        },
+        {
+          name: "新闻媒体",
+          websites: [
+            { name: "人民网", url: "http://www.people.com.cn", icon: "" },
+            { name: "新华网", url: "http://www.xinhuanet.com", icon: "" },
+            { name: "央视网", url: "https://www.cctv.com", icon: "" },
+            { name: "澎湃新闻", url: "https://www.thepaper.cn", icon: "" },
+            { name: "腾讯新闻", url: "https://news.qq.com", icon: "" }
+          ]
+        },
+        {
+          name: "购物",
+          websites: [
+            { name: "淘宝", url: "https://www.taobao.com", icon: "" },
+            { name: "京东", url: "https://www.jd.com", icon: "" },
+            { name: "拼多多", url: "https://www.pinduoduo.com", icon: "" },
+            { name: "苏宁易购", url: "https://www.suning.com", icon: "" },
+            { name: "唯品会", url: "https://www.vip.com", icon: "" }
+          ]
+        },
+        {
+          name: "社交媒体",
+          websites: [
+            { name: "微博", url: "https://weibo.com", icon: "" },
+            { name: "知乎", url: "https://www.zhihu.com", icon: "" },
+            { name: "豆瓣", url: "https://www.douban.com", icon: "" },
+            { name: "B站", url: "https://www.bilibili.com", icon: "" },
+            { name: "小红书", url: "https://www.xiaohongshu.com", icon: "" }
+          ]
+        },
+        {
+          name: "工具",
+          websites: [
+            { name: "百度翻译", url: "https://fanyi.baidu.com", icon: "" },
+            { name: "高德地图", url: "https://www.amap.com", icon: "" },
+            { name: "百度网盘", url: "https://pan.baidu.com", icon: "" },
+            { name: "有道词典", url: "https://dict.youdao.com", icon: "" },
+            { name: "天气预报", url: "http://www.weather.com.cn", icon: "" }
+          ]
+        }
+      ];
+      saveCategories();
+    }
+    
     renderCategories();
   });
 }
