@@ -1,0 +1,337 @@
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('backgroud.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+}
+
+/* 头部样式 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+header h1 {
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+}
+
+.settings-btn {
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.settings-btn:hover {
+  transform: rotate(45deg);
+}
+
+/* 主内容区域 */
+main {
+  width: 100%;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* 分类卡片样式 */
+.category-card {
+  width: calc(25% - 15px);
+  min-width: 250px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: default;
+  will-change: transform;
+  /* 启用硬件加速优化拖拽动画 */
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-card.dragging {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.category-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-title .edit-title {
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+  visibility: hidden;
+  margin-right: 10px; /* 增加右侧边距，与删除按钮拉开距离 */
+}
+
+.category-title:hover .edit-title {
+  visibility: visible;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  color: #ccc;
+  cursor: pointer;
+  visibility: hidden;
+  /* 调整删除按钮位置，与编辑按钮拉开距离 */
+  top: 8px;
+  right: 8px;
+}
+
+.category-card:hover .delete-btn {
+  visibility: visible;
+}
+
+.delete-btn:hover {
+  color: #ff4d4f;
+}
+
+/* 网站列表样式 */
+.website-list {
+  list-style: none;
+}
+
+.website-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+}
+
+.website-item:hover {
+  background-color: #f9f9f9;
+}
+
+.website-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.website-name {
+  flex: 1;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.website-link {
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.add-website-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.add-website-btn:hover {
+  background-color: #eaeaea;
+  color: #333;
+}
+
+/* 模态窗口样式 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #1890ff;
+  outline: none;
+}
+
+.btn {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #40a9ff;
+}
+
+/* 右键菜单样式 */
+.context-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.context-menu ul {
+  list-style: none;
+}
+
+.context-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.context-menu li:hover {
+  background-color: #f5f5f5;
+}
+
+/* 响应式布局 */
+@media (max-width: 1200px) {
+  .category-card {
+    width: calc(33.33% - 14px);
+  }
+}
+
+@media (max-width: 900px) {
+  .category-card {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .category-card {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  header h1 {
+    font-size: 20px;
+  }
+}

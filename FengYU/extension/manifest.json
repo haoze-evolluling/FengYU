@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "凤羽 (FengYU)",
+  "version": "2.0",
+  "description": "浏览器新标签页插件，提供可自定义的常用网站分类快捷访问入口。",
+  "icons": {
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "popup.html"
+  }
+}
