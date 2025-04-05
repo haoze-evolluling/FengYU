@@ -5,26 +5,54 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: rgba(255, 255, 255, 0.9);
+  --text-color: #333;
+  --card-bg: #fff;
+  --border-color: #eee;
+  --hover-bg: #f9f9f9;
+  --modal-bg: #fff;
+  --btn-color: #1890ff;
+  --btn-hover: #40a9ff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --time-bg: rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode {
+  --bg-color: rgba(30, 30, 30, 0.9);
+  --text-color: #e0e0e0;
+  --card-bg: #2c2c2c;
+  --border-color: #444;
+  --hover-bg: #3a3a3a;
+  --modal-bg: #2c2c2c;
+  --btn-color: #177ddc;
+  --btn-hover: #3993dc;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --time-bg: rgba(30, 30, 30, 0.25);
+}
+
 body {
   font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: url('backgroud.png') no-repeat center center fixed;
   background-size: cover;
-  color: #333;
+  color: var(--text-color);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
+  transition: color 0.3s ease;
 }
 
 .container {
   width: 100%;
   max-width: 1200px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--bg-color);
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px var(--shadow-color);
   padding: 20px;
   position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* 头部样式 */
@@ -34,12 +62,12 @@ header {
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 header h1 {
   font-size: 24px;
-  color: #333;
+  color: var(--text-color);
   font-weight: 600;
 }
 
@@ -70,11 +98,11 @@ main {
 .category-card {
   width: calc(25% - 15px);
   min-width: 250px;
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--shadow-color);
   padding: 15px;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   cursor: default;
   will-change: transform;
@@ -83,7 +111,7 @@ main {
 
 .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .category-card.dragging {
@@ -96,7 +124,7 @@ main {
   font-weight: 600;
   margin-bottom: 15px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -149,7 +177,7 @@ main {
 }
 
 .website-item:hover {
-  background-color: #f9f9f9;
+  background-color: var(--hover-bg);
 }
 
 .website-icon {
@@ -165,15 +193,16 @@ main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--text-color);
 }
 
 .website-link {
-  color: #333;
+  color: var(--text-color);
   text-decoration: none;
   display: flex;
   align-items: center;
   width: 100%;
-  transition: transform 0.1s ease;
+  transition: transform 0.1s ease, color 0.3s ease;
 }
 
 .website-link:active {
@@ -186,17 +215,17 @@ main {
   justify-content: center;
   margin-top: 10px;
   padding: 8px;
-  background-color: #f7f7f7;
+  background-color: var(--hover-bg);
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  color: #666;
-  transition: all 0.2s;
+  color: var(--text-color);
+  transition: all 0.2s, background-color 0.3s ease, color 0.3s ease;
 }
 
 .add-website-btn:hover {
-  background-color: #eaeaea;
-  color: #333;
+  background-color: var(--border-color);
+  color: var(--text-color);
 }
 
 /* 模态窗口样式 */
@@ -218,13 +247,14 @@ main {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: var(--modal-bg);
   border-radius: 8px;
   width: 90%;
   max-width: 500px;
   padding: 25px;
   position: relative;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 20px var(--shadow-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .close-btn {
@@ -244,7 +274,7 @@ main {
 .modal h2 {
   margin-bottom: 20px;
   font-size: 20px;
-  color: #333;
+  color: var(--text-color);
 }
 
 .form-group {
@@ -255,16 +285,18 @@ main {
   display: block;
   margin-bottom: 5px;
   font-size: 14px;
-  color: #666;
+  color: var(--text-color);
 }
 
 .form-group input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 14px;
   transition: border-color 0.2s;
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
 .form-group input:focus {
@@ -273,7 +305,7 @@ main {
 }
 
 .btn {
-  background-color: #1890ff;
+  background-color: var(--btn-color);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -284,18 +316,19 @@ main {
 }
 
 .btn:hover {
-  background-color: #40a9ff;
+  background-color: var(--btn-hover);
 }
 
 /* 右键菜单样式 */
 .context-menu {
   display: none;
   position: absolute;
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--shadow-color);
   z-index: 100;
   overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .context-menu ul {
@@ -307,10 +340,11 @@ main {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
+  color: var(--text-color);
 }
 
 .context-menu li:hover {
-  background-color: #f5f5f5;
+  background-color: var(--hover-bg);
 }
 
 /* 系统时间显示 */
@@ -319,16 +353,73 @@ main {
   bottom: 20px;
   right: 20px;
   padding: 12px 18px;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: var(--time-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 8px;
-  color: #333;
+  color: var(--text-color);
   font-size: 24px;
   font-weight: 500;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--shadow-color);
   z-index: 1000;
   user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 深色模式切换开关 */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 44px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  background-color: white;
+  bottom: 4px;
+  content: "";
+  height: 16px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 16px;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--btn-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.theme-icon {
+  margin-left: 8px;
+  font-size: 16px;
+  color: var(--text-color);
 }
 
 /* 响应式布局 */

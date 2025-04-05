@@ -2,6 +2,7 @@
 let categories = [];
 let draggedItem = null;
 let draggedItemIndex = null;
+let darkMode = false;
 
 // DOM元素引用
 const categoriesContainer = document.getElementById('categoriesContainer');
@@ -24,10 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initSystemTime();
 });
 
-// 从Chrome存储加载分类数据
+// 从Chrome存储加载分类数据和主题设置
 function loadCategories() {
-  chrome.storage.sync.get(['categories'], (data) => {
+  chrome.storage.sync.get(['categories', 'darkMode'], (data) => {
     categories = data.categories || [];
+    darkMode = data.darkMode || false;
+    
+    // 应用深色模式设置
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+      document.getElementById('checkbox').checked = true;
+      document.getElementById('themeIcon').textContent = '☀️';
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.getElementById('checkbox').checked = false;
+      document.getElementById('themeIcon').textContent = '🌙';
+    }
+    
     renderCategories();
   });
 }
@@ -36,6 +50,13 @@ function loadCategories() {
 function saveCategories() {
   chrome.storage.sync.set({ categories: categories }, () => {
     console.log('分类数据已保存');
+  });
+}
+
+// 保存深色模式设置
+function saveDarkModePreference() {
+  chrome.storage.sync.set({ darkMode: darkMode }, () => {
+    console.log('深色模式设置已保存');
   });
 }
 
@@ -279,6 +300,23 @@ function hideModal(modal) {
 
 // 设置事件监听器
 function setupEventListeners() {
+  // 深色模式切换
+  const checkbox = document.getElementById('checkbox');
+  const themeIcon = document.getElementById('themeIcon');
+  
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      document.body.classList.add('dark-mode');
+      darkMode = true;
+      themeIcon.textContent = '☀️';
+    } else {
+      document.body.classList.remove('dark-mode');
+      darkMode = false;
+      themeIcon.textContent = '🌙';
+    }
+    saveDarkModePreference();
+  });
+  
   // 设置按钮点击事件
   settingsBtn.addEventListener('click', () => {
     showContextMenu(event);
