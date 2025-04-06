@@ -541,6 +541,43 @@ input:checked + .slider:before {
   
   header {
     justify-content: center;
+    flex-direction: column;
+  }
+  
+  .search-form {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  #searchInput {
+    min-width: 0;
+  }
+  
+  .search-btn {
+    min-width: 60px;
+    white-space: nowrap;
+    padding: 0 10px;
+  }
+}
+
+/* 小屏幕设备的额外优化 */
+@media (max-width: 480px) {
+  .search-form {
+    height: 40px;
+    border-radius: 20px;
+  }
+  
+  .search-btn {
+    min-width: 50px;
+    font-size: 12px;
+    padding: 0 8px;
+    border-radius: 0 20px 20px 0;
+  }
+  
+  #searchEngine {
+    font-size: 12px;
+    padding: 0 5px;
   }
 }
 
@@ -562,6 +599,21 @@ input:checked + .slider:before {
   
   header h1 {
     font-size: 20px;
+  }
+  
+  .search-btn {
+    font-size: 13px;
+    padding: 0 8px;
+  }
+  
+  #searchEngine {
+    padding: 0 5px;
+    font-size: 13px;
+  }
+  
+  #searchInput {
+    padding: 0 8px;
+    font-size: 13px;
   }
 }
 
