@@ -230,20 +230,25 @@ function createCategoryCard(category, index) {
       
       // 创建网站图标
       const websiteIcon = document.createElement('img');
-      websiteIcon.src = website.icon || 'https://www.google.com/s2/favicons?domain=' + new URL(website.url).hostname;
+      const domain = new URL(website.url).hostname;
+      // 使用自定义图标或必应的favicon服务（在中国可访问）
+      websiteIcon.src = website.icon || `https://www.bing.com/favicon/search?q=${encodeURIComponent('https://' + domain)}`;
       websiteIcon.className = 'website-icon';
       websiteIcon.onerror = function() {
-        // 改进图标加载失败的处理逻辑
-        // 1. 尝试使用网站域名的根路径favicon.ico
-        const domain = new URL(website.url).hostname;
-        this.src = `https://${domain}/favicon.ico`;
+        // 多级回退机制
+        // 1. 尝试使用百度的favicon服务
+        this.src = `https://favicon.cccyun.cc/${domain}`;
         
-        // 2. 如果仍然失败，使用本地默认图标
+        // 2. 如果仍然失败，尝试直接从网站域名获取favicon.ico
         this.onerror = function() {
-          // 使用内置的默认图标，确保在移动设备上也能正常显示
-          this.src = 'icon.png';
-          // 防止继续触发onerror事件
-          this.onerror = null;
+          this.src = `https://${domain}/favicon.ico`;
+          
+          // 3. 如果仍然失败，使用本地默认图标
+          this.onerror = function() {
+            this.src = 'icon.png';
+            // 防止继续触发onerror事件
+            this.onerror = null;
+          };
         };
       };
       
