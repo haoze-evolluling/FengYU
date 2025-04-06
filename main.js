@@ -66,53 +66,83 @@ function loadCategories() {
   if (categories.length === 0) {
     categories = [
       {
-        name: "学习资源",
+        name: "搜索引擎",
         websites: [
-          { name: "百度文库", url: "https://wenku.baidu.com", icon: "" },
-          { name: "中国大学MOOC", url: "https://www.icourse163.org", icon: "" },
-          { name: "知网", url: "https://www.cnki.net", icon: "" },
-          { name: "学堂在线", url: "https://www.xuetangx.com", icon: "" },
-          { name: "菜鸟教程", url: "https://www.runoob.com", icon: "" }
+          { name: "百度", url: "https://www.baidu.com", icon: "" },
+          { name: "搜狗搜索", url: "https://www.sogou.com", icon: "" },
+          { name: "360搜索", url: "https://www.so.com", icon: "" },
+          { name: "神马搜索", url: "https://m.sm.cn", icon: "" },
+          { name: "夸克搜索", url: "https://quark.sm.cn", icon: "" }
         ]
       },
       {
-        name: "新闻媒体",
-        websites: [
-          { name: "人民网", url: "http://www.people.com.cn", icon: "" },
-          { name: "新华网", url: "http://www.xinhuanet.com", icon: "" },
-          { name: "央视网", url: "https://www.cctv.com", icon: "" },
-          { name: "澎湃新闻", url: "https://www.thepaper.cn", icon: "" },
-          { name: "腾讯新闻", url: "https://news.qq.com", icon: "" }
-        ]
-      },
-      {
-        name: "购物",
+        name: "综合电商",
         websites: [
           { name: "淘宝", url: "https://www.taobao.com", icon: "" },
           { name: "京东", url: "https://www.jd.com", icon: "" },
           { name: "拼多多", url: "https://www.pinduoduo.com", icon: "" },
-          { name: "苏宁易购", url: "https://www.suning.com", icon: "" },
-          { name: "唯品会", url: "https://www.vip.com", icon: "" }
+          { name: "天猫", url: "https://www.tmall.com", icon: "" },
+          { name: "苏宁易购", url: "https://www.suning.com", icon: "" }
         ]
       },
       {
         name: "社交媒体",
         websites: [
+          { name: "微信", url: "https://weixin.qq.com", icon: "" },
           { name: "微博", url: "https://weibo.com", icon: "" },
+          { name: "QQ空间", url: "https://qzone.qq.com", icon: "" },
           { name: "知乎", url: "https://www.zhihu.com", icon: "" },
-          { name: "豆瓣", url: "https://www.douban.com", icon: "" },
-          { name: "B站", url: "https://www.bilibili.com", icon: "" },
-          { name: "小红书", url: "https://www.xiaohongshu.com", icon: "" }
+          { name: "豆瓣", url: "https://www.douban.com", icon: "" }
         ]
       },
       {
-        name: "工具",
+        name: "视频平台",
         websites: [
-          { name: "百度翻译", url: "https://fanyi.baidu.com", icon: "" },
-          { name: "高德地图", url: "https://www.amap.com", icon: "" },
-          { name: "百度网盘", url: "https://pan.baidu.com", icon: "" },
-          { name: "有道词典", url: "https://dict.youdao.com", icon: "" },
-          { name: "天气预报", url: "http://www.weather.com.cn", icon: "" }
+          { name: "抖音", url: "https://www.douyin.com", icon: "" },
+          { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: "" },
+          { name: "优酷", url: "https://www.youku.com", icon: "" },
+          { name: "腾讯视频", url: "https://v.qq.com", icon: "" },
+          { name: "爱奇艺", url: "https://www.iqiyi.com", icon: "" }
+        ]
+      },
+      {
+        name: "新闻资讯",
+        websites: [
+          { name: "新浪新闻", url: "https://news.sina.com.cn", icon: "" },
+          { name: "腾讯新闻", url: "https://news.qq.com", icon: "" },
+          { name: "人民网", url: "http://www.people.com.cn", icon: "" },
+          { name: "凤凰新闻", url: "https://news.ifeng.com", icon: "" },
+          { name: "新华网", url: "http://www.xinhuanet.com", icon: "" }
+        ]
+      },
+      {
+        name: "学习与教育",
+        websites: [
+          { name: "网易云课堂", url: "https://study.163.com", icon: "" },
+          { name: "学堂在线", url: "https://www.xuetangx.com", icon: "" },
+          { name: "中国大学MOOC", url: "https://www.icourse163.org", icon: "" },
+          { name: "作业帮", url: "https://www.zybang.com", icon: "" },
+          { name: "学而思网校", url: "https://www.xueersi.com", icon: "" }
+        ]
+      },
+      {
+        name: "开发工具",
+        websites: [
+          { name: "扣子", url: "https://coze.cn", icon: "" },
+          { name: "Framer AI", url: "https://framer.com", icon: "" },
+          { name: "10Web AI Builder", url: "https://10web.io", icon: "" },
+          { name: "Nanobrowser", url: "https://github.com/nanobrowser/nanobrowser", icon: "" },
+          { name: "Divi AI", url: "https://divi.ai", icon: "" }
+        ]
+      },
+      {
+        name: "AI网站",
+        websites: [
+          { name: "豆包", url: "https://doubao.com", icon: "" },
+          { name: "秘塔AI", url: "https://metaso.cn", icon: "" },
+          { name: "Kimichat", url: "https://kimi.moonshot.cn", icon: "" },
+          { name: "AI万花筒", url: "https://www.aiwht.com", icon: "" },
+          { name: "AI.城市", url: "https://ai.seitei.cn", icon: "" }
         ]
       }
     ];

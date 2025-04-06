@@ -1,0 +1,87 @@
+一、搜索引擎
+百度                https://www.baidu.com
+
+搜狗搜索            https://www.sogou.com
+
+360搜索             https://www.so.com
+
+神马搜索            https://m.sm.cn
+
+夸克搜索            https://quark.sm.cn
+
+二、综合电商
+淘宝                https://www.taobao.com
+
+京东                https://www.jd.com
+
+拼多多              https://www.pinduoduo.com
+
+天猫                https://www.tmall.com
+
+苏宁易购            https://www.suning.com
+
+三、社交媒体
+微信                https://weixin.qq.com
+
+微博                https://weibo.com
+
+QQ空间              https://qzone.qq.com
+
+知乎                https://www.zhihu.com
+
+豆瓣                https://www.douban.com
+
+四、视频平台
+抖音                https://www.douyin.com
+
+哔哩哔哩            https://www.bilibili.com
+
+优酷                https://www.youku.com
+
+腾讯视频            https://v.qq.com
+
+爱奇艺              https://www.iqiyi.com
+
+五、新闻资讯
+新浪新闻            https://news.sina.com.cn
+
+腾讯新闻            https://news.qq.com
+
+人民网              http://www.people.com.cn
+
+凤凰新闻            https://news.ifeng.com
+
+新华网              http://www.xinhuanet.com
+
+六、学习与教育
+网易云课堂          https://study.163.com
+
+学堂在线            https://www.xuetangx.com
+
+中国大学MOOC        https://www.icourse163.org
+
+作业帮              https://www.zybang.com
+
+学而思网校          https://www.xueersi.com
+
+七、开发工具
+扣子                https://coze.cn
+
+Framer AI           https://framer.com
+
+10Web AI Builder    https://10web.io
+
+Nanobrowser         https://github.com/nanobrowser/nanobrowser
+
+Divi AI             https://divi.ai
+
+八、AI网站
+豆包                https://doubao.com
+
+秘塔AI              https://metaso.cn
+
+Kimichat            https://kimi.moonshot.cn
+
+AI万花筒            https://www.aiwht.com
+
+AI.城市             https://ai.seitei.cn
