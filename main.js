@@ -233,7 +233,18 @@ function createCategoryCard(category, index) {
       websiteIcon.src = website.icon || 'https://www.google.com/s2/favicons?domain=' + new URL(website.url).hostname;
       websiteIcon.className = 'website-icon';
       websiteIcon.onerror = function() {
-        this.src = 'https://www.google.com/s2/favicons?domain=example.com';
+        // 改进图标加载失败的处理逻辑
+        // 1. 尝试使用网站域名的根路径favicon.ico
+        const domain = new URL(website.url).hostname;
+        this.src = `https://${domain}/favicon.ico`;
+        
+        // 2. 如果仍然失败，使用本地默认图标
+        this.onerror = function() {
+          // 使用内置的默认图标，确保在移动设备上也能正常显示
+          this.src = 'icon.png';
+          // 防止继续触发onerror事件
+          this.onerror = null;
+        };
       };
       
       // 创建网站名称
