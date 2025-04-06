@@ -16,7 +16,7 @@ const contextMenu = document.getElementById('contextMenu');
 // 随机选择背景图片
 function setRandomBackground() {
   // 背景图片数组
-  const backgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png'];
+  const backgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
   
   // 随机选择一张背景图片
   const randomIndex = Math.floor(Math.random() * backgrounds.length);
