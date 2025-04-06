@@ -199,6 +199,22 @@ main {
   color: var(--text-color);
 }
 
+.website-delete-btn {
+  font-size: 14px;
+  color: #ccc;
+  cursor: pointer;
+  visibility: hidden;
+  margin-right: 5px;
+}
+
+.website-item:hover .website-delete-btn {
+  visibility: visible;
+}
+
+.website-delete-btn:hover {
+  color: #ff4d4f;
+}
+
 .website-link {
   color: var(--text-color);
   text-decoration: none;

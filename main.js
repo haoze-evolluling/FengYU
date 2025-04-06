@@ -69,9 +69,8 @@ function loadCategories() {
         name: "搜索引擎",
         websites: [
           { name: "百度", url: "https://www.baidu.com", icon: "" },
-          { name: "搜狗搜索", url: "https://www.sogou.com", icon: "" },
-          { name: "360搜索", url: "https://www.so.com", icon: "" },
-          { name: "神马搜索", url: "https://m.sm.cn", icon: "" },
+          { name: "必应搜索", url: "https://www.bing.com", icon: "" },
+          { name: "Google", url: "https://www.google.com", icon: "" },
           { name: "夸克搜索", url: "https://quark.sm.cn", icon: "" }
         ]
       },
@@ -80,7 +79,6 @@ function loadCategories() {
         websites: [
           { name: "淘宝", url: "https://www.taobao.com", icon: "" },
           { name: "京东", url: "https://www.jd.com", icon: "" },
-          { name: "拼多多", url: "https://www.pinduoduo.com", icon: "" },
           { name: "天猫", url: "https://www.tmall.com", icon: "" },
           { name: "苏宁易购", url: "https://www.suning.com", icon: "" }
         ]
@@ -88,7 +86,6 @@ function loadCategories() {
       {
         name: "社交媒体",
         websites: [
-          { name: "微信", url: "https://weixin.qq.com", icon: "" },
           { name: "微博", url: "https://weibo.com", icon: "" },
           { name: "QQ空间", url: "https://qzone.qq.com", icon: "" },
           { name: "知乎", url: "https://www.zhihu.com", icon: "" },
@@ -121,18 +118,16 @@ function loadCategories() {
           { name: "网易云课堂", url: "https://study.163.com", icon: "" },
           { name: "学堂在线", url: "https://www.xuetangx.com", icon: "" },
           { name: "中国大学MOOC", url: "https://www.icourse163.org", icon: "" },
-          { name: "作业帮", url: "https://www.zybang.com", icon: "" },
-          { name: "学而思网校", url: "https://www.xueersi.com", icon: "" }
+          { name: "学习通", url: "https://chaoxing.com", icon: "" },
         ]
       },
       {
         name: "开发工具",
         websites: [
-          { name: "扣子", url: "https://coze.cn", icon: "" },
-          { name: "Framer AI", url: "https://framer.com", icon: "" },
-          { name: "10Web AI Builder", url: "https://10web.io", icon: "" },
-          { name: "Nanobrowser", url: "https://github.com/nanobrowser/nanobrowser", icon: "" },
-          { name: "Divi AI", url: "https://divi.ai", icon: "" }
+          { name: "Github", url: "https://github.com", icon: "" },
+          { name: "Vs Code", url: "https://visualstudio.microsoft.com/zh-hans/", icon: "" },
+          { name: "IntelliJ IDEA", url: "https://www.jetbrains.com.cn/idea/", icon: "" },
+          { name: "Docker", url: "", url: "https://www.docker.com/", icon: "" },
         ]
       },
       {
@@ -140,9 +135,7 @@ function loadCategories() {
         websites: [
           { name: "豆包", url: "https://doubao.com", icon: "" },
           { name: "秘塔AI", url: "https://metaso.cn", icon: "" },
-          { name: "Kimichat", url: "https://kimi.moonshot.cn", icon: "" },
-          { name: "AI万花筒", url: "https://www.aiwht.com", icon: "" },
-          { name: "AI.城市", url: "https://ai.seitei.cn", icon: "" }
+          { name: "Kimi Ai", url: "https://kimi.moonshot.cn", icon: "" },
         ]
       }
     ];
@@ -229,14 +222,47 @@ function createCategoryCard(category, index) {
       const websiteItem = document.createElement('li');
       websiteItem.className = 'website-item';
       
-      websiteItem.innerHTML = `
-        <a href="${website.url}" class="website-link" target="_blank">
-          <img src="${website.icon || 'https://www.google.com/s2/favicons?domain=' + new URL(website.url).hostname}" 
-               class="website-icon" 
-               onerror="this.src='https://www.google.com/s2/favicons?domain=example.com'">
-          <span class="website-name">${website.name}</span>
-        </a>
-      `;
+      // 创建网站链接
+      const websiteLink = document.createElement('a');
+      websiteLink.href = website.url;
+      websiteLink.className = 'website-link';
+      websiteLink.target = '_blank';
+      
+      // 创建网站图标
+      const websiteIcon = document.createElement('img');
+      websiteIcon.src = website.icon || 'https://www.google.com/s2/favicons?domain=' + new URL(website.url).hostname;
+      websiteIcon.className = 'website-icon';
+      websiteIcon.onerror = function() {
+        this.src = 'https://www.google.com/s2/favicons?domain=example.com';
+      };
+      
+      // 创建网站名称
+      const websiteName = document.createElement('span');
+      websiteName.className = 'website-name';
+      websiteName.textContent = website.name;
+      
+      // 添加图标和名称到链接
+      websiteLink.appendChild(websiteIcon);
+      websiteLink.appendChild(websiteName);
+      
+      // 创建删除按钮
+      const deleteBtn = document.createElement('span');
+      deleteBtn.className = 'website-delete-btn';
+      deleteBtn.innerHTML = '×';
+      deleteBtn.title = '删除网站';
+      deleteBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (confirm(`确定要删除「${website.name}」网站吗？`)) {
+          category.websites.splice(websiteIndex, 1);
+          saveCategories();
+          renderCategories();
+        }
+      });
+      
+      // 添加链接和删除按钮到列表项
+      websiteItem.appendChild(deleteBtn);
+      websiteItem.appendChild(websiteLink);
       
       websiteList.appendChild(websiteItem);
     });
