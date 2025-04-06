@@ -231,17 +231,17 @@ function createCategoryCard(category, index) {
       // 创建网站图标
       const websiteIcon = document.createElement('img');
       const domain = new URL(website.url).hostname;
-      // 使用自定义图标或必应的favicon服务（在中国可访问）
-      websiteIcon.src = website.icon || `https://www.bing.com/favicon/search?q=${encodeURIComponent('https://' + domain)}`;
+      // 使用自定义图标或按照优先级获取favicon
+      websiteIcon.src = website.icon || `https://${domain}/favicon.ico`;
       websiteIcon.className = 'website-icon';
       websiteIcon.onerror = function() {
         // 多级回退机制
-        // 1. 尝试使用百度的favicon服务
+        // 1. 如果直接从网站获取失败，尝试从百度获取
         this.src = `https://favicon.cccyun.cc/${domain}`;
         
-        // 2. 如果仍然失败，尝试直接从网站域名获取favicon.ico
+        // 2. 如果百度获取失败，尝试从Google获取
         this.onerror = function() {
-          this.src = `https://${domain}/favicon.ico`;
+          this.src = `https://www.google.com/s2/favicons?domain=${domain}`;
           
           // 3. 如果仍然失败，使用本地默认图标
           this.onerror = function() {
