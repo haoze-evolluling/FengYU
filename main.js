@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 设置事件监听器
   setupEventListeners();
-  
-  // 初始化系统时间显示
-  initSystemTime();
 });
 
 // 从localStorage加载分类数据和主题设置
@@ -319,25 +316,7 @@ function createCategoryCard(category, index) {
   return card;
 }
 
-// 初始化系统时间显示
-function initSystemTime() {
-  const systemTimeElement = document.getElementById('systemTime');
-  
-  // 更新时间的函数
-  function updateTime() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    systemTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
-  }
-  
-  // 立即更新一次时间
-  updateTime();
-  
-  // 每秒更新一次时间
-  setInterval(updateTime, 1000);
-}
+// 系统时间显示功能已删除
 
 // 设置拖拽排序功能
 function setupDragDrop() {

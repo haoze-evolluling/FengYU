@@ -370,24 +370,7 @@ main {
   background-color: var(--hover-bg);
 }
 
-/* 系统时间显示 */
-.system-time {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 12px 18px;
-  background-color: var(--time-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 8px;
-  color: var(--text-color);
-  font-size: 24px;
-  font-weight: 500;
-  box-shadow: 0 2px 10px var(--shadow-color);
-  z-index: 1000;
-  user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
+/* 系统时间显示已删除 */
 
 /* 搜索框样式 */
 .search-container {
@@ -636,3 +619,7 @@ input:checked + .slider:before {
   color: var(--text-color);
   opacity: 0.8;
 }
+
+/* 底部激励文字样式已删除 */
+
+/* 底部激励文字的响应式样式已删除 */
