@@ -60,16 +60,16 @@ function cacheBingImages(count = 3) {
 function setRandomBackground() {
   // 如果已经切换到本地背景，则不再尝试加载必应壁纸
   if (usedLocalBackground) {
-    console.log('已切换到本地背景，使用纯黑色背景');
+    console.log('已切换到本地背景，使用初音未来蓝色背景');
     document.body.style.backgroundImage = 'none';
-    document.body.style.backgroundColor = '#000000';
+    document.body.style.backgroundColor = '#39C5BB';
     return;
   }
   
-  // 先设置纯黑色背景作为默认背景
+  // 先设置初音未来蓝色背景作为默认背景
   document.body.style.backgroundImage = 'none';
-  document.body.style.backgroundColor = '#000000';
-  console.log('先显示本地纯黑背景，等待在线背景加载');
+  document.body.style.backgroundColor = '#39C5BB';
+  console.log('先显示初音未来蓝色背景，等待在线背景加载');
   
   // 尝试使用预缓存的必应壁纸
   if (cachedBingImages.length > 0) {
@@ -94,8 +94,8 @@ function setRandomBackground() {
     document.body.style.backgroundImage = `url('${imageUrl}')`;
   };
   img.onerror = function() {
-    // 如果加载失败，保持纯黑色背景
-    console.error('必应壁纸加载失败，保持纯黑色背景');
+    // 如果加载失败，使用初音未来蓝色背景
+    console.error('必应壁纸加载失败，使用初音未来蓝色背景');
     // 标记已使用本地背景
     usedLocalBackground = true;
     // 将状态保存到localStorage中，确保在当前会话中保持此状态
