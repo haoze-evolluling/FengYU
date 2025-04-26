@@ -60,22 +60,23 @@ function cacheBingImages(count = 3) {
 function setRandomBackground() {
   // 如果已经切换到本地背景，则不再尝试加载必应壁纸
   if (usedLocalBackground) {
-    console.log('已切换到本地背景图片，不再尝试加载必应壁纸');
-    const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
-    const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
-    document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
+    console.log('已切换到本地背景，使用纯黑色背景');
+    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundColor = '#000000';
     return;
   }
   
-  // 创建一个加载中的效果
+  // 先设置纯黑色背景作为默认背景
   document.body.style.backgroundImage = 'none';
-  document.body.style.backgroundColor = '#f0f0f0';
+  document.body.style.backgroundColor = '#000000';
+  console.log('先显示本地纯黑背景，等待在线背景加载');
   
   // 尝试使用预缓存的必应壁纸
   if (cachedBingImages.length > 0) {
     const randomIndex = Math.floor(Math.random() * cachedBingImages.length);
     const imageUrl = cachedBingImages[randomIndex];
     document.body.style.backgroundImage = `url('${imageUrl}')`;
+    console.log('使用预缓存的必应壁纸作为背景');
     return;
   }
   
@@ -85,34 +86,16 @@ function setRandomBackground() {
   // 构建必应壁纸的直接URL（不需要API调用）
   const imageUrl = `https://www.bing.com/th?id=OHR.${getBingImageId(idx)}_1920x1080.jpg&rf=LaDigue_1920x1080.jpg`;
   
-  // 设置1.5秒超时定时器
-  let timeoutId = setTimeout(function() {
-    console.error('必应壁纸加载超时（1.5秒），使用本地背景');
-    const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
-    const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
-    document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
-    // 标记已使用本地背景
-    usedLocalBackground = true;
-    // 将状态保存到localStorage中，确保在当前会话中保持此状态
-    localStorage.setItem('usedLocalBackground', 'true');
-  }, 1500);
-  
   // 预加载图片
   const img = new Image();
   img.onload = function() {
-    // 图片加载完成后清除超时定时器
-    clearTimeout(timeoutId);
-    // 设置为背景
+    // 图片加载完成后设置为背景
+    console.log('必应壁纸加载成功，切换到在线背景');
     document.body.style.backgroundImage = `url('${imageUrl}')`;
   };
   img.onerror = function() {
-    // 图片加载失败时清除超时定时器
-    clearTimeout(timeoutId);
-    // 如果加载失败，使用备用背景
-    console.error('必应壁纸加载失败，使用备用背景');
-    const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
-    const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
-    document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
+    // 如果加载失败，保持纯黑色背景
+    console.error('必应壁纸加载失败，保持纯黑色背景');
     // 标记已使用本地背景
     usedLocalBackground = true;
     // 将状态保存到localStorage中，确保在当前会话中保持此状态
