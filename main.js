@@ -35,15 +35,51 @@ function getBingImageId(idx = 0) {
   return imageIds[idx];
 }
 
+// 全局变量，用于存储是否已切换到本地背景图片
+let usedLocalBackground = false;
+// 全局变量，用于存储预缓存的必应壁纸
+let cachedBingImages = [];
+
+// 预缓存必应壁纸
+function cacheBingImages(count = 3) {
+  for (let i = 0; i < count; i++) {
+    const imageUrl = `https://www.bing.com/th?id=OHR.${getBingImageId(i)}_1920x1080.jpg&rf=LaDigue_1920x1080.jpg`;
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = function() {
+      console.log(`预缓存必应壁纸 ${i+1}/${count} 成功`);
+      cachedBingImages.push(imageUrl);
+    };
+    img.onerror = function() {
+      console.error(`预缓存必应壁纸 ${i+1}/${count} 失败`);
+    };
+  }
+}
+
 // 从必应壁纸API获取背景图片
 function setRandomBackground() {
+  // 如果已经切换到本地背景，则不再尝试加载必应壁纸
+  if (usedLocalBackground) {
+    console.log('已切换到本地背景图片，不再尝试加载必应壁纸');
+    const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
+    const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
+    document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
+    return;
+  }
+  
   // 创建一个加载中的效果
   document.body.style.backgroundImage = 'none';
   document.body.style.backgroundColor = '#f0f0f0';
   
-  // 由于浏览器的跨域限制，直接获取必应壁纸API可能会失败
-  // 因此我们直接使用必应的图片URL格式
-  const today = new Date();
+  // 尝试使用预缓存的必应壁纸
+  if (cachedBingImages.length > 0) {
+    const randomIndex = Math.floor(Math.random() * cachedBingImages.length);
+    const imageUrl = cachedBingImages[randomIndex];
+    document.body.style.backgroundImage = `url('${imageUrl}')`;
+    return;
+  }
+  
+  // 如果没有预缓存的图片，则尝试加载新的必应壁纸
   const idx = Math.floor(Math.random() * 7); // 随机获取最近7天内的一张壁纸
   
   // 构建必应壁纸的直接URL（不需要API调用）
@@ -52,7 +88,13 @@ function setRandomBackground() {
   // 设置1.5秒超时定时器
   let timeoutId = setTimeout(function() {
     console.error('必应壁纸加载超时（1.5秒），使用本地背景');
-    document.body.style.backgroundImage = `url('backgroud01.png')`;
+    const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
+    const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
+    document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
+    // 标记已使用本地背景
+    usedLocalBackground = true;
+    // 将状态保存到localStorage中，确保在当前会话中保持此状态
+    localStorage.setItem('usedLocalBackground', 'true');
   }, 1500);
   
   // 预加载图片
@@ -71,12 +113,30 @@ function setRandomBackground() {
     const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
     const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
     document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
+    // 标记已使用本地背景
+    usedLocalBackground = true;
+    // 将状态保存到localStorage中，确保在当前会话中保持此状态
+    localStorage.setItem('usedLocalBackground', 'true');
   };
   img.src = imageUrl;
 }
 
 // 初始化函数
 document.addEventListener('DOMContentLoaded', () => {
+  // 检查是否已经在当前会话中使用了本地背景
+  // 如果localStorage中没有存储usedLocalBackground的值，则初始化为false
+  if (localStorage.getItem('usedLocalBackground') === null) {
+    localStorage.setItem('usedLocalBackground', 'false');
+  }
+  
+  // 从localStorage中读取usedLocalBackground的值
+  usedLocalBackground = localStorage.getItem('usedLocalBackground') === 'true';
+  
+  // 预缓存必应壁纸（仅当未使用本地背景时）
+  if (!usedLocalBackground) {
+    cacheBingImages(3);
+  }
+  
   // 设置随机背景图片
   setRandomBackground();
   
