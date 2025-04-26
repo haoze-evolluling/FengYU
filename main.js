@@ -49,11 +49,11 @@ function setRandomBackground() {
   // 构建必应壁纸的直接URL（不需要API调用）
   const imageUrl = `https://www.bing.com/th?id=OHR.${getBingImageId(idx)}_1920x1080.jpg&rf=LaDigue_1920x1080.jpg`;
   
-  // 设置5秒超时定时器
+  // 设置1.5秒超时定时器
   let timeoutId = setTimeout(function() {
-    console.error('必应壁纸加载超时（5秒），使用本地背景');
+    console.error('必应壁纸加载超时（1.5秒），使用本地背景');
     document.body.style.backgroundImage = `url('backgroud01.png')`;
-  }, 5000);
+  }, 1500);
   
   // 预加载图片
   const img = new Image();
