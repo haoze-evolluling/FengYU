@@ -13,17 +13,66 @@ const addCategoryForm = document.getElementById('addCategoryForm');
 const addWebsiteForm = document.getElementById('addWebsiteForm');
 const contextMenu = document.getElementById('contextMenu');
 
-// 随机选择背景图片
+// 获取必应图片ID的辅助函数
+function getBingImageId(idx = 0) {
+  // 这里我们使用一些常见的必应壁纸ID
+  // 实际上这些ID每天都在变化，这里只是一些示例
+  const imageIds = [
+    'WinterBison_ZH-CN5219099383',
+    'MountainToucan_ZH-CN5774195238',
+    'ChineseNewYearEve2023_ZH-CN7188893388',
+    'Snowdrops_ZH-CN5805234585',
+    'BambooSnow_ZH-CN6941929948',
+    'GreatTits_ZH-CN0367320638',
+    'SunriseMoai_ZH-CN7413178404'
+  ];
+  
+  // 如果没有提供索引或索引超出范围，则使用随机索引
+  if (idx === undefined || idx < 0 || idx >= imageIds.length) {
+    idx = Math.floor(Math.random() * imageIds.length);
+  }
+  
+  return imageIds[idx];
+}
+
+// 从必应壁纸API获取背景图片
 function setRandomBackground() {
-  // 背景图片数组
-  const backgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
+  // 创建一个加载中的效果
+  document.body.style.backgroundImage = 'none';
+  document.body.style.backgroundColor = '#f0f0f0';
   
-  // 随机选择一张背景图片
-  const randomIndex = Math.floor(Math.random() * backgrounds.length);
-  const selectedBackground = backgrounds[randomIndex];
+  // 由于浏览器的跨域限制，直接获取必应壁纸API可能会失败
+  // 因此我们直接使用必应的图片URL格式
+  const today = new Date();
+  const idx = Math.floor(Math.random() * 7); // 随机获取最近7天内的一张壁纸
   
-  // 设置背景图片
-  document.body.style.backgroundImage = `url('${selectedBackground}')`;
+  // 构建必应壁纸的直接URL（不需要API调用）
+  const imageUrl = `https://www.bing.com/th?id=OHR.${getBingImageId(idx)}_1920x1080.jpg&rf=LaDigue_1920x1080.jpg`;
+  
+  // 设置5秒超时定时器
+  let timeoutId = setTimeout(function() {
+    console.error('必应壁纸加载超时（5秒），使用本地背景');
+    document.body.style.backgroundImage = `url('backgroud01.png')`;
+  }, 5000);
+  
+  // 预加载图片
+  const img = new Image();
+  img.onload = function() {
+    // 图片加载完成后清除超时定时器
+    clearTimeout(timeoutId);
+    // 设置为背景
+    document.body.style.backgroundImage = `url('${imageUrl}')`;
+  };
+  img.onerror = function() {
+    // 图片加载失败时清除超时定时器
+    clearTimeout(timeoutId);
+    // 如果加载失败，使用备用背景
+    console.error('必应壁纸加载失败，使用备用背景');
+    const backupBackgrounds = ['backgroud01.png', 'backgroud02.png', 'backgroud03.png', 'background05.png', 'background06.png'];
+    const randomIndex = Math.floor(Math.random() * backupBackgrounds.length);
+    document.body.style.backgroundImage = `url('${backupBackgrounds[randomIndex]}')`;    
+  };
+  img.src = imageUrl;
 }
 
 // 初始化函数
