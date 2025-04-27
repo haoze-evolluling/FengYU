@@ -35,10 +35,12 @@ function getBingImageId(idx = 0) {
   return imageIds[idx];
 }
 
-// 全局变量，用于存储是否已切换到本地背景图片
-let usedLocalBackground = false;
+// 全局变量，用于存储是否使用在线背景图片
+let useOnlineBackground = false;
 // 全局变量，用于存储预缓存的必应壁纸
 let cachedBingImages = [];
+// 本地背景图片路径
+const localBackgroundPath = '/c:/Users/leeha/Desktop/FengYU/backgroud01.png';
 
 // 预缓存必应壁纸
 function cacheBingImages(count = 3) {
@@ -58,25 +60,32 @@ function cacheBingImages(count = 3) {
 
 // 从必应壁纸API获取背景图片
 function setRandomBackground() {
-  // 如果已经切换到本地背景，则不再尝试加载必应壁纸
-  if (usedLocalBackground) {
-    console.log('已切换到本地背景，使用初音未来蓝色背景');
-    document.body.style.backgroundImage = 'none';
-    document.body.style.backgroundColor = '#39C5BB';
+  // 默认使用本地背景图片
+  console.log('使用本地背景图片');
+  document.body.style.backgroundImage = `url('${localBackgroundPath}')`;
+  
+  // 如果不使用在线背景，直接返回
+  if (!useOnlineBackground) {
     return;
   }
   
-  // 先设置初音未来蓝色背景作为默认背景
-  document.body.style.backgroundImage = 'none';
-  document.body.style.backgroundColor = '#39C5BB';
-  console.log('先显示初音未来蓝色背景，等待在线背景加载');
-  
-  // 尝试使用预缓存的必应壁纸
+  // 如果选择使用在线背景，尝试使用预缓存的必应壁纸
   if (cachedBingImages.length > 0) {
     const randomIndex = Math.floor(Math.random() * cachedBingImages.length);
     const imageUrl = cachedBingImages[randomIndex];
-    document.body.style.backgroundImage = `url('${imageUrl}')`;
-    console.log('使用预缓存的必应壁纸作为背景');
+    
+    // 预加载图片
+    const img = new Image();
+    img.onload = function() {
+      // 图片加载完成后设置为背景
+      console.log('必应壁纸加载成功，切换到在线背景');
+      document.body.style.backgroundImage = `url('${imageUrl}')`;
+    };
+    img.onerror = function() {
+      // 如果加载失败，保持使用本地背景
+      console.error('必应壁纸加载失败，保持使用本地背景');
+    };
+    img.src = imageUrl;
     return;
   }
   
@@ -94,29 +103,25 @@ function setRandomBackground() {
     document.body.style.backgroundImage = `url('${imageUrl}')`;
   };
   img.onerror = function() {
-    // 如果加载失败，使用初音未来蓝色背景
-    console.error('必应壁纸加载失败，使用初音未来蓝色背景');
-    // 标记已使用本地背景
-    usedLocalBackground = true;
-    // 将状态保存到localStorage中，确保在当前会话中保持此状态
-    localStorage.setItem('usedLocalBackground', 'true');
+    // 如果加载失败，保持使用本地背景
+    console.error('必应壁纸加载失败，保持使用本地背景');
   };
   img.src = imageUrl;
 }
 
 // 初始化函数
 document.addEventListener('DOMContentLoaded', () => {
-  // 检查是否已经在当前会话中使用了本地背景
-  // 如果localStorage中没有存储usedLocalBackground的值，则初始化为false
-  if (localStorage.getItem('usedLocalBackground') === null) {
-    localStorage.setItem('usedLocalBackground', 'false');
+  // 检查是否使用在线背景
+  // 如果localStorage中没有存储useOnlineBackground的值，则初始化为false（默认使用本地背景）
+  if (localStorage.getItem('useOnlineBackground') === null) {
+    localStorage.setItem('useOnlineBackground', 'false');
   }
   
-  // 从localStorage中读取usedLocalBackground的值
-  usedLocalBackground = localStorage.getItem('usedLocalBackground') === 'true';
+  // 从localStorage中读取useOnlineBackground的值
+  useOnlineBackground = localStorage.getItem('useOnlineBackground') === 'true';
   
-  // 预缓存必应壁纸（仅当未使用本地背景时）
-  if (!usedLocalBackground) {
+  // 预缓存必应壁纸（仅当使用在线背景时）
+  if (useOnlineBackground) {
     cacheBingImages(3);
   }
   
