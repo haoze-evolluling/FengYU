@@ -40,7 +40,7 @@ let useOnlineBackground = false;
 // 全局变量，用于存储预缓存的必应壁纸
 let cachedBingImages = [];
 // 本地背景图片路径
-const localBackgroundPath = '/c:/Users/leeha/Desktop/FengYU/backgroud01.png';
+const localBackgroundPath = 'backgroud01.png';
 
 // 预缓存必应壁纸
 function cacheBingImages(count = 3) {
