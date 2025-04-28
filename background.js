@@ -1,6 +1,3 @@
-// 全局变量，用于存储是否使用在线背景图片
-let useOnlineBackground = false;
-
 // 本地背景图片路径
 const localBackgroundPath = 'backgroud01.png';
 // 全局变量，用于存储深色模式状态
@@ -27,16 +24,9 @@ function saveDarkModePreference() {
 
 // 初始化背景和主题
 function initBackgroundAndTheme() {
-  // 检查是否使用在线背景
-  // 如果localStorage中没有存储useOnlineBackground的值，则初始化为false（默认使用本地背景）
-  if (localStorage.getItem('useOnlineBackground') === null) {
-    localStorage.setItem('useOnlineBackground', 'false');
-  }
-  
-  // 从localStorage中读取useOnlineBackground的值
-  useOnlineBackground = localStorage.getItem('useOnlineBackground') === 'true';
-  
-
+  const checkbox = document.getElementById('checkbox');
+  const themeIcon = document.getElementById('themeIcon');
+  const body = document.body;
   
   // 设置随机背景图片
   setRandomBackground();
@@ -46,32 +36,21 @@ function initBackgroundAndTheme() {
   darkMode = savedDarkMode ? JSON.parse(savedDarkMode) : false;
   
   // 应用深色模式设置
-  if (darkMode) {
-    document.body.classList.add('dark-mode');
-    document.getElementById('checkbox').checked = true;
-    document.getElementById('themeIcon').textContent = '☀️';
-  } else {
-    document.body.classList.remove('dark-mode');
-    document.getElementById('checkbox').checked = false;
-    document.getElementById('themeIcon').textContent = '🌙';
-  }
+  body.classList.toggle('dark-mode', darkMode);
+  checkbox.checked = darkMode;
+  themeIcon.textContent = darkMode ? '☀️' : '🌙';
 }
 
 // 设置主题相关的事件监听器
 function setupThemeListeners() {
   const checkbox = document.getElementById('checkbox');
   const themeIcon = document.getElementById('themeIcon');
+  const body = document.body;
   
   checkbox.addEventListener('change', function() {
-    if (this.checked) {
-      document.body.classList.add('dark-mode');
-      darkMode = true;
-      themeIcon.textContent = '☀️';
-    } else {
-      document.body.classList.remove('dark-mode');
-      darkMode = false;
-      themeIcon.textContent = '🌙';
-    }
+    darkMode = this.checked;
+    body.classList.toggle('dark-mode', darkMode);
+    themeIcon.textContent = darkMode ? '☀️' : '🌙';
     saveDarkModePreference();
   });
 }
