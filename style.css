@@ -36,7 +36,7 @@ body.dark-mode {
 body {
   font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* 背景图片将通过JavaScript动态设置 */
-  background-color: #b964b0; /* 添加背景颜色作为图片加载前的默认值 */
+  background-color: #39C5BB; /* 添加背景颜色作为图片加载前的默认值 */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
