@@ -2,7 +2,6 @@
 let categories = [];
 let draggedItem = null;
 let draggedItemIndex = null;
-let darkMode = false;
 
 // DOM元素引用
 const categoriesContainer = document.getElementById('categoriesContainer');
@@ -13,148 +12,13 @@ const addCategoryForm = document.getElementById('addCategoryForm');
 const addWebsiteForm = document.getElementById('addWebsiteForm');
 const contextMenu = document.getElementById('contextMenu');
 
-// 获取必应图片ID的辅助函数
-function getBingImageId(idx = 0) {
-  // 这里我们使用一些常见的必应壁纸ID
-  // 实际上这些ID每天都在变化，这里只是一些示例
-  const imageIds = [
-    'WinterBison_ZH-CN5219099383',
-    'MountainToucan_ZH-CN5774195238',
-    'ChineseNewYearEve2023_ZH-CN7188893388',
-    'Snowdrops_ZH-CN5805234585',
-    'BambooSnow_ZH-CN6941929948',
-    'GreatTits_ZH-CN0367320638',
-    'SunriseMoai_ZH-CN7413178404'
-  ];
-  
-  // 如果没有提供索引或索引超出范围，则使用随机索引
-  if (idx === undefined || idx < 0 || idx >= imageIds.length) {
-    idx = Math.floor(Math.random() * imageIds.length);
-  }
-  
-  return imageIds[idx];
-}
-
-// 全局变量，用于存储是否使用在线背景图片
-let useOnlineBackground = false;
-// 全局变量，用于存储预缓存的必应壁纸
-let cachedBingImages = [];
-// 本地背景图片路径
-const localBackgroundPath = 'backgroud01.png';
-
-// 预缓存必应壁纸
-function cacheBingImages(count = 3) {
-  for (let i = 0; i < count; i++) {
-    const imageUrl = `https://www.bing.com/th?id=OHR.${getBingImageId(i)}_1920x1080.jpg&rf=LaDigue_1920x1080.jpg`;
-    const img = new Image();
-    img.src = imageUrl;
-    img.onload = function() {
-      console.log(`预缓存必应壁纸 ${i+1}/${count} 成功`);
-      cachedBingImages.push(imageUrl);
-    };
-    img.onerror = function() {
-      console.error(`预缓存必应壁纸 ${i+1}/${count} 失败`);
-    };
-  }
-}
-
-// 从必应壁纸API获取背景图片
-function setRandomBackground() {
-  // 默认使用本地背景图片
-  console.log('使用本地背景图片');
-  document.body.style.backgroundImage = `url('${localBackgroundPath}')`;
-  
-  // 如果不使用在线背景，直接返回
-  if (!useOnlineBackground) {
-    return;
-  }
-  
-  // 如果选择使用在线背景，尝试使用预缓存的必应壁纸
-  if (cachedBingImages.length > 0) {
-    const randomIndex = Math.floor(Math.random() * cachedBingImages.length);
-    const imageUrl = cachedBingImages[randomIndex];
-    
-    // 预加载图片
-    const img = new Image();
-    img.onload = function() {
-      // 图片加载完成后设置为背景
-      console.log('必应壁纸加载成功，切换到在线背景');
-      document.body.style.backgroundImage = `url('${imageUrl}')`;
-    };
-    img.onerror = function() {
-      // 如果加载失败，保持使用本地背景
-      console.error('必应壁纸加载失败，保持使用本地背景');
-    };
-    img.src = imageUrl;
-    return;
-  }
-  
-  // 如果没有预缓存的图片，则尝试加载新的必应壁纸
-  const idx = Math.floor(Math.random() * 7); // 随机获取最近7天内的一张壁纸
-  
-  // 构建必应壁纸的直接URL（不需要API调用）
-  const imageUrl = `https://www.bing.com/th?id=OHR.${getBingImageId(idx)}_1920x1080.jpg&rf=LaDigue_1920x1080.jpg`;
-  
-  // 预加载图片
-  const img = new Image();
-  img.onload = function() {
-    // 图片加载完成后设置为背景
-    console.log('必应壁纸加载成功，切换到在线背景');
-    document.body.style.backgroundImage = `url('${imageUrl}')`;
-  };
-  img.onerror = function() {
-    // 如果加载失败，保持使用本地背景
-    console.error('必应壁纸加载失败，保持使用本地背景');
-  };
-  img.src = imageUrl;
-}
-
-// 初始化函数
-document.addEventListener('DOMContentLoaded', () => {
-  // 检查是否使用在线背景
-  // 如果localStorage中没有存储useOnlineBackground的值，则初始化为false（默认使用本地背景）
-  if (localStorage.getItem('useOnlineBackground') === null) {
-    localStorage.setItem('useOnlineBackground', 'false');
-  }
-  
-  // 从localStorage中读取useOnlineBackground的值
-  useOnlineBackground = localStorage.getItem('useOnlineBackground') === 'true';
-  
-  // 预缓存必应壁纸（仅当使用在线背景时）
-  if (useOnlineBackground) {
-    cacheBingImages(3);
-  }
-  
-  // 设置随机背景图片
-  setRandomBackground();
-  
-  // 从localStorage加载数据
-  loadCategories();
-  
-  // 设置事件监听器
-  setupEventListeners();
-});
-
-// 从localStorage加载分类数据和主题设置
+// 从localStorage加载分类数据
 function loadCategories() {
   // 尝试从localStorage获取数据
   const savedCategories = localStorage.getItem('categories');
-  const savedDarkMode = localStorage.getItem('darkMode');
   
   // 解析数据
   categories = savedCategories ? JSON.parse(savedCategories) : [];
-  darkMode = savedDarkMode ? JSON.parse(savedDarkMode) : false;
-  
-  // 应用深色模式设置
-  if (darkMode) {
-    document.body.classList.add('dark-mode');
-    document.getElementById('checkbox').checked = true;
-    document.getElementById('themeIcon').textContent = '☀️';
-  } else {
-    document.body.classList.remove('dark-mode');
-    document.getElementById('checkbox').checked = false;
-    document.getElementById('themeIcon').textContent = '🌙';
-  }
   
   // 如果没有分类，添加默认分类和网站
   if (categories.length === 0) {
@@ -221,7 +85,7 @@ function loadCategories() {
           { name: "Github", url: "https://github.com", icon: "" },
           { name: "Vs Code", url: "https://visualstudio.microsoft.com/zh-hans/", icon: "" },
           { name: "IntelliJ IDEA", url: "https://www.jetbrains.com.cn/idea/", icon: "" },
-          { name: "Docker", url: "", url: "https://www.docker.com/", icon: "" },
+          { name: "Docker", url: "https://www.docker.com/", icon: "" },
         ]
       },
       {
@@ -243,12 +107,6 @@ function loadCategories() {
 function saveCategories() {
   localStorage.setItem('categories', JSON.stringify(categories));
   console.log('分类数据已保存');
-}
-
-// 保存深色模式设置到localStorage
-function saveDarkModePreference() {
-  localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  console.log('深色模式设置已保存');
 }
 
 // 渲染所有分类卡片
@@ -413,8 +271,6 @@ function createCategoryCard(category, index) {
   return card;
 }
 
-// 系统时间显示功能已删除
-
 // 设置拖拽排序功能
 function setupDragDrop() {
   const cards = document.querySelectorAll('.category-card');
@@ -520,6 +376,39 @@ function hideModal(modal) {
   modal.classList.remove('show');
 }
 
+// 显示右键菜单
+function showContextMenu(e) {
+  const menu = document.getElementById('contextMenu');
+  menu.style.display = 'block';
+  
+  // 调整菜单位置
+  const x = e.clientX;
+  const y = e.clientY;
+  
+  // 确保菜单不会超出视口
+  const menuWidth = menu.offsetWidth;
+  const menuHeight = menu.offsetHeight;
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  
+  if (x + menuWidth > windowWidth) {
+    menu.style.left = (windowWidth - menuWidth) + 'px';
+  } else {
+    menu.style.left = x + 'px';
+  }
+  
+  if (y + menuHeight > windowHeight) {
+    menu.style.top = (windowHeight - menuHeight) + 'px';
+  } else {
+    menu.style.top = y + 'px';
+  }
+}
+
+// 隐藏右键菜单
+function hideContextMenu() {
+  document.getElementById('contextMenu').style.display = 'none';
+}
+
 // 设置事件监听器
 function setupEventListeners() {
   // 搜索表单提交事件
@@ -553,22 +442,6 @@ function setupEventListeners() {
       }
     });
   }
-  // 深色模式切换
-  const checkbox = document.getElementById('checkbox');
-  const themeIcon = document.getElementById('themeIcon');
-  
-  checkbox.addEventListener('change', function() {
-    if (this.checked) {
-      document.body.classList.add('dark-mode');
-      darkMode = true;
-      themeIcon.textContent = '☀️';
-    } else {
-      document.body.classList.remove('dark-mode');
-      darkMode = false;
-      themeIcon.textContent = '🌙';
-    }
-    saveDarkModePreference();
-  });
   
   // 设置按钮点击事件
   settingsBtn.addEventListener('click', (event) => {
@@ -683,35 +556,17 @@ function setupEventListeners() {
   });
 }
 
-// 显示右键菜单
-function showContextMenu(e) {
-  const menu = document.getElementById('contextMenu');
-  menu.style.display = 'block';
+// 初始化函数
+document.addEventListener('DOMContentLoaded', () => {
+  // 初始化背景和主题
+  window.backgroundModule.initBackgroundAndTheme();
   
-  // 调整菜单位置
-  const x = e.clientX;
-  const y = e.clientY;
+  // 从localStorage加载数据
+  loadCategories();
   
-  // 确保菜单不会超出视口
-  const menuWidth = menu.offsetWidth;
-  const menuHeight = menu.offsetHeight;
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
+  // 设置事件监听器
+  setupEventListeners();
   
-  if (x + menuWidth > windowWidth) {
-    menu.style.left = (windowWidth - menuWidth) + 'px';
-  } else {
-    menu.style.left = x + 'px';
-  }
-  
-  if (y + menuHeight > windowHeight) {
-    menu.style.top = (windowHeight - menuHeight) + 'px';
-  } else {
-    menu.style.top = y + 'px';
-  }
-}
-
-// 隐藏右键菜单
-function hideContextMenu() {
-  document.getElementById('contextMenu').style.display = 'none';
-}
+  // 设置主题相关的事件监听器
+  window.backgroundModule.setupThemeListeners();
+});
