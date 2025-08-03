@@ -113,6 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 设置主题相关的事件监听器
   window.backgroundModule.setupThemeListeners();
+  
+  // 设置搜索功能
+  setupSearchFunction();
+  
+  // 设置搜索引擎选择功能
+  setupSearchEngineSettings();
 });
 
 // 导出核心功能给UI模块使用
@@ -130,3 +136,103 @@ window.categoryCore = {
   },
   saveCategories: saveCategories
 };
+
+// 搜索功能
+function setupSearchFunction() {
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('searchInput');
+  
+  if (!searchForm || !searchInput) return;
+  
+  // 从localStorage获取保存的搜索引擎
+  const savedEngine = localStorage.getItem('searchEngine') || 'https://www.baidu.com/s?wd=';
+  
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const query = searchInput.value.trim();
+    if (!query) return;
+    
+    // 获取当前选择的搜索引擎
+    const searchEngine = localStorage.getItem('searchEngine') || 'https://www.baidu.com/s?wd=';
+    
+    // 构建搜索URL并跳转
+    const searchUrl = searchEngine + encodeURIComponent(query);
+    window.open(searchUrl, '_blank');
+    
+    // 清空输入框
+    searchInput.value = '';
+  });
+  
+  // 支持回车键搜索
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      searchForm.dispatchEvent(new Event('submit'));
+    }
+  });
+}
+
+// 搜索引擎设置功能
+function setupSearchEngineSettings() {
+  const searchEngineSelect = document.getElementById('searchEngineSelect');
+  if (!searchEngineSelect) return;
+  
+  // 从localStorage加载保存的搜索引擎
+  const savedEngine = localStorage.getItem('searchEngine') || 'https://www.baidu.com/s?wd=';
+  
+  // 设置下拉框的默认值
+  const options = Array.from(searchEngineSelect.options);
+  const savedOption = options.find(option => option.value === savedEngine);
+  if (savedOption) {
+    searchEngineSelect.value = savedEngine;
+  } else {
+    // 如果保存的引擎不在选项中，默认选择百度
+    searchEngineSelect.value = 'https://www.baidu.com/s?wd=';
+  }
+  
+  // 监听搜索引擎选择变化
+  searchEngineSelect.addEventListener('change', (e) => {
+    const selectedEngine = e.target.value;
+    localStorage.setItem('searchEngine', selectedEngine);
+    
+    // 显示提示
+    showToast(`搜索引擎已切换为: ${e.target.options[e.target.selectedIndex].text}`);
+  });
+}
+
+// 显示提示消息
+function showToast(message) {
+  // 创建提示元素
+  const toast = document.createElement('div');
+  toast.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  `;
+  toast.textContent = message;
+  
+  document.body.appendChild(toast);
+  
+  // 显示动画
+  setTimeout(() => {
+    toast.style.opacity = '1';
+  }, 10);
+  
+  // 3秒后移除
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 300);
+  }, 3000);
+}

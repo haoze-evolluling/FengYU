@@ -12,6 +12,12 @@
   <div class="container">
     <header>
       <h1>凤羽 (FengYU)</h1>
+      <div class="search-container">
+        <form id="searchForm" class="search-form">
+          <input type="text" id="searchInput" placeholder="搜索..." class="search-input" autocomplete="off">
+          <button type="submit" class="search-btn" title="搜索">🔍</button>
+        </form>
+      </div>
       <div class="settings-btn" id="settingsBtn" title="设置">⚙️</div>
     </header>
     
@@ -75,6 +81,16 @@
               </label>
               <div class="theme-icon" id="settingsThemeIcon">🌙</div>
             </div>
+          </div>
+          <div class="settings-item">
+            <label>搜索引擎</label>
+            <select id="searchEngineSelect" class="search-engine-select">
+              <option value="https://www.google.com/search?q=">Google</option>
+              <option value="https://www.baidu.com/s?wd=">百度</option>
+              <option value="https://cn.bing.com/search?q=">必应</option>
+              <option value="https://www.sogou.com/web?query=">搜狗</option>
+              <option value="https://search.yahoo.com/search?p=">Yahoo</option>
+            </select>
           </div>
         </div>
       </div>
