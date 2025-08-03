@@ -317,37 +317,7 @@ function hideContextMenu() {
 
 // 设置事件监听器
 function setupEventListeners(categories, saveCallback) {
-  // 搜索表单提交事件
-  const searchForm = document.getElementById('searchForm');
-  if (searchForm) {
-    searchForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const searchInput = document.getElementById('searchInput').value.trim();
-      const searchEngine = document.getElementById('searchEngine').value;
-      
-      if (searchInput) {
-        let searchUrl = '';
-        switch (searchEngine) {
-          case 'baidu':
-            searchUrl = `https://www.baidu.com/s?wd=${encodeURIComponent(searchInput)}`;
-            break;
-          case 'google':
-            searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchInput)}`;
-            break;
-          case 'bing':
-            searchUrl = `https://www.bing.com/search?q=${encodeURIComponent(searchInput)}`;
-            break;
-          case 'sogou':
-            searchUrl = `https://www.sogou.com/web?query=${encodeURIComponent(searchInput)}`;
-            break;
-          default:
-            searchUrl = `https://www.baidu.com/s?wd=${encodeURIComponent(searchInput)}`;
-        }
-        
-        window.open(searchUrl, '_blank');
-      }
-    });
-  }
+
   
   // 设置按钮点击事件
   settingsBtn.addEventListener('click', (event) => {

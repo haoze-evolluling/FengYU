@@ -33,9 +33,7 @@ class ClickEffectManager {
     // 为上下文菜单项添加点击效果
     this.addClickEffect('.context-menu li', 'context-menu-item');
 
-    // 为搜索表单元素添加点击效果
-    this.addClickEffect('#searchForm button', 'search-btn');
-    this.addClickEffect('#searchForm select', 'click-effect');
+
 
     // 为模态窗口中的按钮添加点击效果
     this.addClickEffect('.modal .btn', 'modal-btn');
