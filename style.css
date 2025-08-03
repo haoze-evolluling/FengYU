@@ -321,7 +321,7 @@ main {
 }
 
 .modal-content {
-  background: rgba(var(--card-bg-rgb), 0.25);
+  background: rgba(var(--card-bg-rgb), 0.85);
   border-radius: 20px;
   width: 90%;
   max-width: 500px;
@@ -340,14 +340,17 @@ main {
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size: 24px;
-  color: #999;
+  font-size: 28px;
+  color: #666;
   cursor: pointer;
   transition: color 0.2s;
+  font-weight: bold;
+  line-height: 1;
 }
 
 .close-btn:hover {
-  color: var(--text-color);
+  color: #ff4d4f;
+  transform: scale(1.1);
 }
 
 .modal h2 {
