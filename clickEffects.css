@@ -1,0 +1,89 @@
+/* 点击缩放效果样式 */
+.click-effect {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.click-effect:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 按钮点击效果 */
+.btn.click-effect {
+  transform-origin: center;
+}
+
+.btn.click-effect:active {
+  transform: scale(0.92);
+}
+
+/* 卡片点击效果 */
+.category-card.click-effect,
+.website-card.click-effect {
+  transform-origin: center;
+}
+
+.category-card.click-effect:active,
+.website-card.click-effect:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 搜索按钮点击效果 */
+.search-btn.click-effect {
+  transform-origin: center;
+}
+
+.search-btn.click-effect:active {
+  transform: scale(0.9);
+}
+
+/* 设置按钮点击效果 */
+.settings-btn.click-effect,
+.close-btn.click-effect {
+  transform-origin: center;
+}
+
+.settings-btn.click-effect:active,
+.close-btn.click-effect:active {
+  transform: scale(0.85);
+}
+
+/* 模态窗口按钮点击效果 */
+.modal .btn.click-effect:active {
+  transform: scale(0.93);
+}
+
+/* 主题切换开关点击效果 */
+.theme-switch.click-effect {
+  transform-origin: center;
+}
+
+.theme-switch.click-effect:active {
+  transform: scale(0.88);
+}
+
+/* 上下文菜单项点击效果 */
+.context-menu li.click-effect {
+  transform-origin: left center;
+}
+
+.context-menu li.click-effect:active {
+  transform: scale(0.97);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 暗色模式下的点击效果调整 */
+body.dark-mode .click-effect:active {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .category-card.click-effect:active,
+body.dark-mode .website-card.click-effect:active {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .context-menu li.click-effect:active {
+  background-color: rgba(255, 255, 255, 0.05);
+}
