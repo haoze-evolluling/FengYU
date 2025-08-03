@@ -98,7 +98,6 @@ function loadCategories() {
 // 保存分类数据到localStorage
 function saveCategories() {
   localStorage.setItem('categories', JSON.stringify(categories));
-  console.log('分类数据已保存');
 }
 
 // 初始化函数

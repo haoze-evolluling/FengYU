@@ -447,8 +447,6 @@ main {
   -webkit-backdrop-filter: blur(15px) saturate(1.2);
 }
 
-/* 系统时间显示已删除 */
-
 /* 搜索框样式 */
 .search-container {
   flex: 1;
@@ -611,7 +609,6 @@ input:checked + .slider:before {
     order: 3;
     width: 100%;
   }
-  
   header {
     justify-content: center;
     flex-direction: column;
@@ -709,7 +706,3 @@ input:checked + .slider:before {
   color: var(--text-color);
   opacity: 0.8;
 }
-
-/* 底部激励文字样式已删除 */
-
-/* 底部激励文字的响应式样式已删除 */

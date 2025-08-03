@@ -3,23 +3,14 @@ const localBackgroundPath = 'backgroud01.png';
 // 全局变量，用于存储深色模式状态
 let darkMode = false;
 
-
-
-
-
-// 从必应壁纸API获取背景图片
+// 设置背景图片
 function setRandomBackground() {
-  // 默认使用本地背景图片
-  console.log('使用本地背景图片');
   document.body.style.backgroundImage = `url('${localBackgroundPath}')`;
-  
-
 }
 
 // 保存深色模式设置到localStorage
 function saveDarkModePreference() {
   localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  console.log('深色模式设置已保存');
 }
 
 // 初始化背景和主题
