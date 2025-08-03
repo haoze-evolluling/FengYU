@@ -91,6 +91,14 @@ header h1 {
   font-size: 20px;
   cursor: pointer;
   user-select: none;
+  margin-left: auto;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.settings-btn:hover {
+  background-color: rgba(var(--card-bg-rgb), 0.2);
 }
 
 /* 主内容区域 */
@@ -447,6 +455,28 @@ input:checked + .slider:before {
   .category-card {
     width: calc(33.33% - 14px);
   }
+}
+
+/* 设置窗口样式 */
+.settings-content {
+  padding: 20px 0;
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-item label {
+  font-size: 16px;
+  color: var(--text-color);
 }
 
 /* 响应式样式 */

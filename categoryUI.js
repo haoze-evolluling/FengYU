@@ -319,9 +319,9 @@ function hideContextMenu() {
 function setupEventListeners(categories, saveCallback) {
 
   
-  // 设置按钮点击事件
-  settingsBtn.addEventListener('click', (event) => {
-    showContextMenu(event);
+  // 设置按钮点击事件 - 显示设置菜单
+  settingsBtn.addEventListener('click', () => {
+    showModal(document.getElementById('settingsModal'));
   });
   
   // 关闭模态窗口按钮
@@ -406,12 +406,6 @@ function setupEventListeners(categories, saveCallback) {
   
   document.getElementById('addNewCategory').addEventListener('click', () => {
     hideContextMenu();
-    document.getElementById('categoryName').value = '';
-    showModal(addCategoryModal);
-  });
-  
-  // 确保添加分类模态窗口正常显示
-  document.getElementById('settingsBtn').addEventListener('click', () => {
     document.getElementById('categoryName').value = '';
     showModal(addCategoryModal);
   });

@@ -12,16 +12,7 @@
   <div class="container">
     <header>
       <h1>凤羽 (FengYU)</h1>
-      <div style="display: flex; align-items: center; margin-left: auto;">
-        <div class="theme-switch-wrapper">
-          <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider"></div>
-          </label>
-          <div class="theme-icon" id="themeIcon">🌙</div>
-        </div>
-        <div class="settings-btn" id="settingsBtn" title="设置">⚙️</div>
-      </div>
+      <div class="settings-btn" id="settingsBtn" title="设置">⚙️</div>
     </header>
     
     <main>
@@ -66,6 +57,26 @@
           </div>
           <button type="submit" class="btn">保存</button>
         </form>
+      </div>
+    </div>
+
+    <!-- 设置模态窗口 -->
+    <div class="modal" id="settingsModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>设置</h2>
+        <div class="settings-content">
+          <div class="settings-item">
+            <label>深色模式</label>
+            <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="settingsCheckbox">
+                <input type="checkbox" id="settingsCheckbox" />
+                <div class="slider"></div>
+              </label>
+              <div class="theme-icon" id="settingsThemeIcon">🌙</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
