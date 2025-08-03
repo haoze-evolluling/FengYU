@@ -145,33 +145,44 @@ main {
   align-items: center;
 }
 
-.category-title .edit-title {
+.category-title span:first-child {
+  flex: 1;
+}
+
+.category-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-title,
+.delete-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   color: #999;
   cursor: pointer;
   visibility: hidden;
-  margin-right: 10px; /* 增加右侧边距，与删除按钮拉开距离 */
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  line-height: 1;
 }
 
-.category-title:hover .edit-title {
-  visibility: visible;
-}
-
-.delete-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 16px;
-  color: #ccc;
-  cursor: pointer;
-  visibility: hidden;
-  /* 调整删除按钮位置，与编辑按钮拉开距离 */
-  top: 8px;
-  right: 8px;
-}
-
+.category-card:hover .edit-title,
 .category-card:hover .delete-btn {
   visibility: visible;
+}
+
+.edit-title:hover,
+.delete-btn:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-color);
 }
 
 .delete-btn:hover {

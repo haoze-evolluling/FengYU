@@ -45,23 +45,13 @@ function createCategoryCard(category, index) {
   titleDiv.className = 'category-title';
   titleDiv.innerHTML = `
     <span>${category.name}</span>
-    <span class="edit-title" title="编辑分类名称">✏️</span>
+    <div class="category-actions">
+      <button class="edit-title" title="编辑分类名称">✏️</button>
+      <button class="delete-btn" title="删除分类">×</button>
+    </div>
   `;
   
-  // 删除按钮
-  const deleteBtn = document.createElement('div');
-  deleteBtn.className = 'delete-btn';
-  deleteBtn.innerHTML = '×';
-  deleteBtn.title = '删除分类';
-  deleteBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (confirm(`确定要删除「${category.name}」分类吗？`)) {
-      const categories = window.categoryCore.getCategories();
-      categories.splice(index, 1);
-      window.categoryCore.saveCategories();
-      renderCategories(categories);
-    }
-  });
+
   
   // 网站列表
   const websiteList = document.createElement('ul');
@@ -150,9 +140,19 @@ function createCategoryCard(category, index) {
   
   // 组装卡片
   card.appendChild(titleDiv);
-  card.appendChild(deleteBtn);
   card.appendChild(websiteList);
   card.appendChild(addWebsiteBtn);
+  
+  // 删除按钮事件（现在在titleDiv内部）
+  titleDiv.querySelector('.delete-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (confirm(`确定要删除「${category.name}」分类吗？`)) {
+      const categories = window.categoryCore.getCategories();
+      categories.splice(index, 1);
+      window.categoryCore.saveCategories();
+      renderCategories(categories);
+    }
+  });
   
   // 编辑分类名称
   titleDiv.querySelector('.edit-title').addEventListener('click', (e) => {
