@@ -6,7 +6,7 @@
 }
 
 :root {
-  --bg-color: rgba(255, 255, 255, 0.9);
+  --bg-color: rgba(255, 255, 255, 0.25);
   --text-color: #333;
   --card-bg: #fff;
   --card-bg-rgb: 255, 255, 255;
@@ -20,7 +20,7 @@
 }
 
 body.dark-mode {
-  --bg-color: rgba(30, 30, 30, 0.9);
+  --bg-color: rgba(30, 30, 30, 0.25);
   --text-color: #e0e0e0;
   --card-bg: #2c2c2c;
   --card-bg-rgb: 42, 42, 42;
@@ -59,6 +59,9 @@ body {
   padding: 20px;
   position: relative;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* 头部样式 */
@@ -106,20 +109,24 @@ main {
 .category-card {
   width: calc(25% - 15px);
   min-width: 250px;
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px var(--shadow-color);
+  background-color: rgba(var(--card-bg-rgb), 0.7);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 15px;
   transition: all 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   cursor: default;
   will-change: transform;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   /* 启用硬件加速优化拖拽动画 */
 }
 
 .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  background-color: rgba(var(--card-bg-rgb), 0.8);
 }
 
 .category-card.dragging {
