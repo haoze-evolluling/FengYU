@@ -391,18 +391,7 @@ function setupEventListeners(categories, saveCallback) {
     }
   });
   
-  // 右键菜单项点击事件
-  document.getElementById('editCategory').addEventListener('click', () => {
-    hideContextMenu();
-    // 当前未实现编辑分类逻辑，因为需要知道点击的是哪个分类
-    alert('请直接点击分类卡片上的编辑图标来编辑分类');
-  });
-  
-  document.getElementById('deleteCategory').addEventListener('click', () => {
-    hideContextMenu();
-    // 当前未实现删除分类逻辑，因为需要知道点击的是哪个分类
-    alert('请直接点击分类卡片上的删除按钮来删除分类');
-  });
+
   
   document.getElementById('addNewCategory').addEventListener('click', () => {
     hideContextMenu();
