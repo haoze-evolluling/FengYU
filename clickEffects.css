@@ -38,6 +38,16 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* 分类卡片悬停效果 */
+.category-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 
 
 /* 设置按钮点击效果 */
@@ -86,6 +96,10 @@ body.dark-mode .website-card.click-effect:active {
 
 body.dark-mode .website-item.click-effect:active {
   box-shadow: 0 2px 6px rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .category-card:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .context-menu li.click-effect:active {
