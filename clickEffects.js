@@ -23,9 +23,11 @@ class ClickEffectManager {
     this.addClickEffect('.settings-btn', 'settings-btn');
     this.addClickEffect('.close-btn', 'close-btn');
 
-    // 为卡片添加点击效果
-    this.addClickEffect('.category-card', 'category-card');
+    // 为卡片添加点击效果（不包括category-card，取消div的点击反馈）
     this.addClickEffect('.website-card', 'website-card');
+    
+    // 为网站列表项添加点击反馈
+    this.addClickEffect('.website-item', 'website-item');
 
     // 为主题切换开关添加点击效果
     this.addClickEffect('.theme-switch', 'theme-switch');
@@ -84,26 +86,32 @@ class ClickEffectManager {
       const buttons = element.querySelectorAll ? element.querySelectorAll('.btn, .search-btn, .settings-btn, .close-btn') : [];
       buttons.forEach(btn => this.addClickEffect(btn, 'btn'));
 
-      // 为新添加的卡片添加效果
-      const cards = element.querySelectorAll ? element.querySelectorAll('.category-card, .website-card') : [];
+      // 为新添加的卡片添加效果（不包括category-card）
+      const cards = element.querySelectorAll ? element.querySelectorAll('.website-card') : [];
       cards.forEach(card => this.addClickEffect(card, 'card'));
+      
+      // 为新添加的网站列表项添加效果
+      const websiteItems = element.querySelectorAll ? element.querySelectorAll('.website-item') : [];
+      websiteItems.forEach(item => this.addClickEffect(item, 'website-item'));
 
       // 为新添加的上下文菜单项添加效果
       const menuItems = element.querySelectorAll ? element.querySelectorAll('.context-menu li') : [];
       menuItems.forEach(item => this.addClickEffect(item, 'context-menu-item'));
 
       // 如果元素本身是需要添加效果的类型
-      if (element.matches) {
-        if (element.matches('.btn, .search-btn, .settings-btn, .close-btn')) {
-          this.addClickEffect(element, 'btn');
-        } else if (element.matches('.category-card, .website-card')) {
-          this.addClickEffect(element, 'card');
-        } else if (element.matches('.context-menu li')) {
-          this.addClickEffect(element, 'context-menu-item');
-        } else if (element.matches('.theme-switch')) {
-          this.addClickEffect(element, 'theme-switch');
+        if (element.matches) {
+          if (element.matches('.btn, .search-btn, .settings-btn, .close-btn')) {
+            this.addClickEffect(element, 'btn');
+          } else if (element.matches('.website-card')) {
+            this.addClickEffect(element, 'card');
+          } else if (element.matches('.website-item')) {
+            this.addClickEffect(element, 'website-item');
+          } else if (element.matches('.context-menu li')) {
+            this.addClickEffect(element, 'context-menu-item');
+          } else if (element.matches('.theme-switch')) {
+            this.addClickEffect(element, 'theme-switch');
+          }
         }
-      }
     } catch (error) {
       console.warn('Error processing new element for click effects:', error);
     }
