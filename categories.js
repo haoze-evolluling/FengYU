@@ -20,10 +20,50 @@ function loadCategories() {
           { name: "百度", url: "https://www.baidu.com", icon: "" },
           { name: "必应搜索", url: "https://www.bing.com", icon: "" },
           { name: "Google", url: "https://www.google.com", icon: "" },
-          { name: "夸克搜索", url: "https://quark.sm.cn", icon: "" }
+          { name: "夸克搜索", url: "https://quark.sm.cn", icon: "" },
+          { name: "搜狗搜索", url: "https://www.sogou.com", icon: "" }
+        ]
+      },
+      {
+        name: "社交媒体",
+        websites: [
+          { name: "微博", url: "https://weibo.com", icon: "" },
+          { name: "知乎", url: "https://www.zhihu.com", icon: "" },
+          { name: "小红书", url: "https://www.xiaohongshu.com", icon: "" },
+          { name: "豆瓣", url: "https://www.douban.com", icon: "" },
+          { name: "哔哩哔哩", url: "https://www.bilibili.com", icon: "" }
+        ]
+      },
+      {
+        name: "学习教育",
+        websites: [
+          { name: "中国大学MOOC", url: "https://www.icourse163.org", icon: "" },
+          { name: "网易云课堂", url: "https://study.163.com", icon: "" },
+          { name: "慕课网", url: "https://www.imooc.com", icon: "" },
+          { name: "学堂在线", url: "https://www.xuetangx.com", icon: "" },
+          { name: "Coursera", url: "https://www.coursera.org", icon: "" }
+        ]
+      },
+      {
+        name: "新闻资讯",
+        websites: [
+          { name: "新浪新闻", url: "https://news.sina.com.cn", icon: "" },
+          { name: "网易新闻", url: "https://news.163.com", icon: "" },
+          { name: "腾讯新闻", url: "https://news.qq.com", icon: "" },
+          { name: "人民网", url: "http://www.people.com.cn", icon: "" },
+          { name: "新华网", url: "http://www.xinhuanet.com", icon: "" }
+        ]
+      },
+      {
+        name: "工具软件",
+        websites: [
+          { name: "在线翻译", url: "https://translate.google.com", icon: "" },
+          { name: "百度网盘", url: "https://pan.baidu.com", icon: "" },
+          { name: "腾讯文档", url: "https://docs.qq.com", icon: "" },
+          { name: "石墨文档", url: "https://shimo.im", icon: "" },
+          { name: "ProcessOn", url: "https://www.processon.com", icon: "" }
         ]
       }
-      // 其他分类...
     ];
     saveCategories();
   }
