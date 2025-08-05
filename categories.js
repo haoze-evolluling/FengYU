@@ -45,16 +45,6 @@ function loadCategories() {
         ]
       },
       {
-        name: "新闻资讯",
-        websites: [
-          { name: "新浪新闻", url: "https://news.sina.com.cn", icon: "" },
-          { name: "网易新闻", url: "https://news.163.com", icon: "" },
-          { name: "腾讯新闻", url: "https://news.qq.com", icon: "" },
-          { name: "人民网", url: "http://www.people.com.cn", icon: "" },
-          { name: "新华网", url: "http://www.xinhuanet.com", icon: "" }
-        ]
-      },
-      {
         name: "工具软件",
         websites: [
           { name: "在线翻译", url: "https://translate.google.com", icon: "" },
